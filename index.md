@@ -110,13 +110,25 @@ jQuery(document).ready(function(){
 	    console.log('play');
     
 	    jQuery(this).addClass("playing");
-	    jQuery("#audioplayer").attr("src", "https://commons.princeton.edu/media/heirloom-gardens/adeeb_bonnetta.mp3");
+	    jQuery("#audioplayer").attr("src", "https://commons.princeton.edu/media/heirloom-gardens/" + file);
 	    jQuery(this).attr("src",'{{ "/assets/images/pause-circle.svg" | relative_url }}');	
 	    audioplayer.play();
 	  }
 	  e.preventDefault();
 	  
 	});
+	
+	
+	jQuery(".btn-close").click(function(){
+	  var audioplayer = jQuery('#audioplayer')[0];
+	  audioplayer.load();
+	});
+	
+	
+	jQuery(".modal").on("hidden.bs.modal", function () {
+	  var audioplayer = jQuery('#audioplayer')[0];
+	  audioplayer.load();
+	});	
 
 
 });
