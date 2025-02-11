@@ -65,64 +65,24 @@ layout: default
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
-        <div style="width:49%">
-	<img src="{{ "/assets/images/" | relative_url }}{{ file.Image }}" style="max-width:100%;"/>
+        <div>
+
         </div>
 
-        <div class='modal-body-info' style="width:49%">
+        <div class='modal-body-info'>
         <p>{{file.Description}}</p>
-        <p><img src="{{ "/assets/images/play-circle.svg" | relative_url }}" data-identifier='{{ file.Identifier }}' class='playbutton ' style="height:64px;"/></p>
-            
+        
+        <!--<p><audio src="{{file.Audio}}" controls/></p>-->
+        
         </div>
-      </div>
-      <div class="modal-footer">
-        <!--<audio src="{{ "/assets/audio/" | relative_url }}{{ file.Audio }}" controls  style="width:100%;"/>-->
       </div>
     </div>
   </div>
 </div>
-
+<script src="https://player.vimeo.com/api/player.js"></script>
 {% endfor %}
 
-<audio src="#" id="audioplayer"></audio>
 
-
-<script>
-
-jQuery(document).ready(function(){
-
-	jQuery(".playbutton").click(function(e){
-	  var audioplayer = jQuery('#audioplayer')[0]; 
-	  var file = jQuery(this).attr('data-identifier') + ".mp3";
-
-	  if(jQuery(this).hasClass("playing")) {
-	  
-	    console.log('pause');
-
-	    jQuery(this).removeClass("playing");
-	    jQuery(this).attr("src",'{{ "/assets/images/play-circle.svg" | relative_url }}');
-    
-	    
-	    audioplayer.pause();
-	  }
-	  else {
-
-	    console.log('play');
-    
-	    jQuery(this).addClass("playing");
-	    jQuery("#audioplayer").attr("src", "https://commons.princeton.edu/media/heirloom-gardens/adeeb_bonnetta.mp3");
-	    jQuery(this).attr("src",'{{ "/assets/images/pause-circle.svg" | relative_url }}');	
-	    audioplayer.play();
-	  }
-	  e.preventDefault();
-	  
-	});
-
-
-});
-
-
-</script>
 
 
 
