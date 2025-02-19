@@ -1,19 +1,6 @@
 body { font-size:12pt; font-weight:400; }
 
-#gallery { display:flex; width: 98%;  flex-wrap: nowrap;justify-content: center; margin: 0px auto;}
-#gallery-nav { margin:1.5em;}
-
-#cat_menu {
-  display:flex;
-  margin-top:1em;
-  justify-content:center;
-}
-#cat_menu li { list-style-type:none;margin:0.2em; }
-#cat_menu li a { font-size:1.3em; }
-#cat_menu li a.active { background:hotpink;border:0px; }
-
-
-/*********** tiles *********/
+#gallery { display:flex; width: 100%;  flex-wrap: nowrap;margin-right:200px;justify-content: center;}
 
 .tile { width:180px;  }
 .tile img { width:100%; }
@@ -27,26 +14,29 @@ body { font-size:12pt; font-weight:400; }
   margin: 0 1em 1em;
   line-height: 1.2em;
 }
+
+.gallery-window {
+  width: 100%;
+  overflow-y:scroll;
+  -ms-overflow-style: none;  /* Internet Explorer 10+ */
+  scrollbar-width: none;  /* Firefox */
+}
+
+.gallery-window::-webkit-scrollbar { 
+    display: none;  /* Safari and Chrome */
+}
+
+
 h2 {
   margin:2em 0 0 0.5em; 
 }
 
-
-/*
-.gallery-window {
-  width: 100%;
-  overflow-y:scroll;
-  -ms-overflow-style: none;
-  scrollbar-width: none;
+#cat_menu {
+  display:flex;
+  margin-top:1em;
 }
-
-.gallery-window::-webkit-scrollbar { 
-    display: none;
-}
-*/
-
-
-
+#cat_menu li { list-style-type:none;margin:0.2em; }
+#cat_menu li a { font-size:1.3em; }
 
 /**** modal ****/
 

@@ -5,6 +5,11 @@
 layout: default
 ---
 
+<script>
+var data = {{ site.data.audiofiles | jsonify }};
+var baseurl = "{{ site.baseurl }}";
+</script>
+
 {% assign categories = "" | split: "|" %}
 {% for file in site.data.audiofiles %}
 
@@ -19,45 +24,20 @@ layout: default
 
 {% assign categories = categories | uniq %}
 
-{% for category in categories %}
 
-<h2>{{category}}</h2>
-<div class='gallery-window'>
-<div id="gallery">
+<div id="gallery-nav">
 
-{% for file in site.data.audiofiles %}
-
-{% assign cats = file.Categories | split: "," %}
-
-{% if file.Shown == "1" %}
-
-{% if cats contains category %}
-
-  <div class="tile">
-    <div class='tile-content'>
-      <img src="{{ "/assets/images/" | relative_url }}{{ file.Image }}"/>
-      <a href="#modal" data-bs-toggle="modal" data-bs-target="#mymodal{{file.ID}}"><img class='play' src="{{ "/assets/images/play.svg" | relative_url }}"/></a>
-    </div>
-    <div class='tile-title'>{{ file.Title }}</div>
-  </div>
-
-
-{% endif %} 
-
-{% endif %}
-
-{% endfor %}
+<ul id="cat_menu">
+{% for category in categories %}<li><a href='#' data-cat="{{category}}" class='btn btn-secondary category'>{{category}}</a></li>{% endfor %}
+<li><a href='#' data-cat="all" class='btn btn-secondary category active'>All</a></li>
+</ul>
 
 </div>
-</div>
-
-{% endfor %}
-
+<div id="gallery" style="flex-wrap:wrap;"></div>
 
 
 {% for file in site.data.audiofiles %}
-
-<div class="modal" tabindex="-1" id="mymodal{{file.ID}}">
+<div class="modal fade" id="exampleModal{{file.ID}}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog modal-xl modal-dialog-centered">
     <div class="modal-content">
       <div class="modal-header">
@@ -72,69 +52,16 @@ layout: default
         <div class='modal-body-info' style="width:49%">
         <p>{{file.Description}}</p>
         <p><img src="{{ "/assets/images/play-circle.svg" | relative_url }}" data-identifier='{{ file.Identifier }}' class='playbutton ' style="height:64px;"/></p>
-            
         </div>
       </div>
-      <div class="modal-footer">
-        <!--<audio src="{{ "/assets/audio/" | relative_url }}{{ file.Audio }}" controls  style="width:100%;"/>-->
-      </div>
+      <div class="modal-footer"></div>
     </div>
   </div>
 </div>
-
 {% endfor %}
 
 <audio src="#" id="audioplayer"></audio>
-
-
-<script>
-
-jQuery(document).ready(function(){
-
-	jQuery(".playbutton").click(function(e){
-	  var audioplayer = jQuery('#audioplayer')[0]; 
-	  var file = jQuery(this).attr('data-identifier') + ".mp3";
-
-	  if(jQuery(this).hasClass("playing")) {
-	  
-	    console.log('pause');
-
-	    jQuery(this).removeClass("playing");
-	    jQuery(this).attr("src",'{{ "/assets/images/play-circle.svg" | relative_url }}');
-    
-	    
-	    audioplayer.pause();
-	  }
-	  else {
-
-	    console.log('play');
-    
-	    jQuery(this).addClass("playing");
-	    jQuery("#audioplayer").attr("src", "https://commons.princeton.edu/media/heirloom-gardens/" + file);
-	    jQuery(this).attr("src",'{{ "/assets/images/pause-circle.svg" | relative_url }}');	
-	    audioplayer.play();
-	  }
-	  e.preventDefault();
-	  
-	});
-	
-	
-	jQuery(".btn-close").click(function(){
-	  var audioplayer = jQuery('#audioplayer')[0];
-	  audioplayer.load();
-	});
-	
-	
-	jQuery(".modal").on("hidden.bs.modal", function () {
-	  var audioplayer = jQuery('#audioplayer')[0];
-	  audioplayer.load();
-	});	
-
-
-});
-
-
-</script>
+<script src="{{ "/assets/js/kiosk.js" | relative_url }}"></script>
 
 
 
