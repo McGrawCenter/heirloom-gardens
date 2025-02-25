@@ -22,6 +22,7 @@ var baseurl = "{{ site.baseurl }}";
 
 {% endfor %}
 
+
 {% assign categories = categories | uniq | sort %}
 
 
