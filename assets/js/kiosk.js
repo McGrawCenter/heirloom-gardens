@@ -65,6 +65,7 @@ jQuery(document).ready(function(){
 
 	  jQuery.each(data, function(i,v){
 	    var cats = v.Categories.split(',');
+	    cats = cats.map(s => s.trim()).sort();
 	    if(cats.indexOf(cat) >= 0) { 
 	       jQuery("#gallery").append(tileTemplate(v));
 	    }
