@@ -22,7 +22,7 @@ var baseurl = "{{ site.baseurl }}";
 
 {% endfor %}
 
-{% assign categories = categories | uniq %}
+{% assign categories = categories | uniq | sort %}
 
 
 <div id="gallery-nav">
