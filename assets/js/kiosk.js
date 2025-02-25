@@ -1,7 +1,7 @@
 jQuery(document).ready(function(){
 
 	jQuery(".playbutton").click(function(e){
-	  var audioplayer = jQuery('#audioplayer')[0]; 
+	  var audioplayer = jQuery('.audioplayer')[0]; 
 	  var file = jQuery(this).attr('data-identifier') + ".mp3";
 
 	  if(jQuery(this).hasClass("playing")) {
@@ -19,7 +19,7 @@ jQuery(document).ready(function(){
 	    console.log('play');
     
 	    jQuery(this).addClass("playing");
-	    jQuery("#audioplayer").attr("src", "https://commons.princeton.edu/media/heirloom-gardens/" + file);
+	    jQuery(".audioplayer").attr("src", "https://commons.princeton.edu/media/heirloom-gardens/" + file);
 	    jQuery(this).attr("src",baseurl+'/assets/images/pause-circle.svg');	
 	    audioplayer.play();
 	  }
@@ -29,13 +29,13 @@ jQuery(document).ready(function(){
 	
 	
 	jQuery(".btn-close").click(function(){
-	  var audioplayer = jQuery('#audioplayer')[0];
+	  var audioplayer = jQuery('#'+current+'-audioplayer')[0];
 	  audioplayer.load();
 	});
 	
 	
 	jQuery(".modal").on("hidden.bs.modal", function () {
-	  var audioplayer = jQuery('#audioplayer')[0];
+	  var audioplayer = jQuery('#'+current+'-audioplayer')[0];
 	  audioplayer.load();
 	});
 	
@@ -44,11 +44,16 @@ jQuery(document).ready(function(){
 	  return "<div class='tile'>\
 	    <div class='tile-content'>\
 	      <img src='"+baseurl+"/assets/images/"+v.Image+"'/>\
-	      <a href='#modal' data-bs-toggle='modal' data-bs-target='#exampleModal"+v.ID+"'><img class='play' src='"+baseurl+"/assets/images/play3.svg'/></a>\
+	      <a href='#modal' data-bs-toggle='modal' data-bs-target='#exampleModal"+v.ID+"' class='gallery-tile' data-identifier='"+v.Identifier+"'><img class='play' src='"+baseurl+"/assets/images/play3.svg'/></a>\
 	    </div>\
 	    <div class='tile-title'>"+v.Title+"</div>\
 	  </div>";	
 	}
+	
+	
+	jQuery(document).on("click", ".gallery-tile", function(){
+	  current = jQuery(this).attr('data-identifier');
+	});
 		
 	
 	function buildGallery(cat) {
@@ -73,6 +78,9 @@ jQuery(document).ready(function(){
 
 	  }
 	}
+	
+	
+	
 
 
 	jQuery(".category").click(function(e){
